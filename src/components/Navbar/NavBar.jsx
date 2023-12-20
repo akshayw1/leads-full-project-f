@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import getUserInfo from '../../utils/getUserInfo';
 
 const NavBar = () => {
+  const info = getUserInfo();
+
   return (
     <div className="bg-black">
       <>
@@ -123,20 +126,29 @@ const NavBar = () => {
               </a>
             </li>
           </ul>
-          <Link
-            to="/login"
-            className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-          >
-            {/* <a className=""> */}
-            Sign In
-            {/* </a> */}
-          </Link>
-          <Link
-            to="/signup"
-            className="hidden lg:inline-block py-2 px-6 bg-regal-blue  hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-          >
-            Sign up
-          </Link>
+          {info && info.data ? (
+            <Link
+              to="/logout"
+              className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+            >
+              Sign Out
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/signup"
+                className="hidden lg:inline-block py-2 px-6 bg-regal-blue  hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </nav>
         <div className="navbar-menu relative z-50 hidden">
           <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25" />
