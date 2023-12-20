@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../app/customAxios';
 
-export const statistics = createAsyncThunk(
+export const fetchStatistics = createAsyncThunk(
   'statistics',
   async (_, { rejectWithValue }) => {
     try {
@@ -22,17 +22,17 @@ export const statisticsSlice = createSlice({
   },
   extraReducers: (builer) => {
     builer
-      .addCase(statistics.pending, (state) => {
+      .addCase(fetchStatistics.pending, (state) => {
         state.isLoading = true;
         state.data = null;
         state.error = null;
       })
-      .addCase(statistics.fulfilled, (state, action) => {
+      .addCase(fetchStatistics.fulfilled, (state, action) => {
         state.data = action.payload;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(statistics.rejected, (state, action) => {
+      .addCase(fetchStatistics.rejected, (state, action) => {
         state.data = null;
         state.isLoading = false;
         state.error = action.payload;
