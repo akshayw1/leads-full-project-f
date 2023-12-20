@@ -8,6 +8,7 @@ import { searchSchema } from '../../validations/inputValidation';
 import { search } from '../../redux/reducers/searchSlice';
 import Button from '../Button';
 import TableComp from '../TableComp/TableComp';
+import { fetchStatistics } from '../../redux/reducers/statisticsSlice';
 
 const searchCard = () => {
   const [searchResults, setSearchResults] = useState();
@@ -21,6 +22,7 @@ const searchCard = () => {
   const onSubmit = async (searchData) => {
     try {
       const response = await dispatch(search(searchData)).unwrap();
+      dispatch(fetchStatistics());
       setSearchResults(response.data);
     } catch (error) {
       showErrorMessage(error.data.message);

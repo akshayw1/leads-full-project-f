@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchStatistics } from '../../redux/reducers/statisticsSlice';
 import getUserInfo from '../../utils/getUserInfo';
 
 const TuteCard = () => {
+  const statistics = useSelector((state) => state.statistics);
+  const dispatch = useDispatch();
   const info = getUserInfo();
+
+  useEffect(() => {
+    dispatch(fetchStatistics());
+  }, [dispatch]);
+
+  if (statistics.length < 0) return null;
+
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg border max-w-xl mx-auto">
       <div className="px-4 py-5 sm:px-6">
@@ -20,7 +31,7 @@ const TuteCard = () => {
               Remaining Search:
             </dt>
             <p className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              20
+              {statistics.data ? statistics.data.searchQueriesPerDay : 0}
             </p>
           </div>
           <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -28,7 +39,7 @@ const TuteCard = () => {
               Remaining Leads:
             </p>
             <p className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              10
+              {statistics.data ? statistics.data.leadsPerDay : 0}
             </p>
           </div>
         </dl>

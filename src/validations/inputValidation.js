@@ -7,7 +7,7 @@ export const registerSchema = yup.object().shape({
     .string()
     .min(8, 'Password must be at least 8 characters')
     .matches(/[A-Z]/, 'Password must contain at least one uppercase character')
-    .matches(/[0-9]/, 'Password must contain at least one numeric character')
+    .matches(/[0-9]/, 'Password must contain at least one numeric characte')
     .required('Password is required')
     .trim(),
 });
