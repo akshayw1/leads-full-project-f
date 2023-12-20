@@ -1,11 +1,13 @@
 import React from 'react';
+import getUserInfo from '../../utils/getUserInfo';
 
 const TuteCard = () => {
+  const info = getUserInfo();
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg border max-w-xl mx-auto">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">
-          Hello Vithaal
+          {info && info.data.name}
         </h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">
           Keep enjoying Leads App

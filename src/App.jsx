@@ -1,9 +1,10 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Home from './components/Home';
-import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Pricing from './components/pricing/Pricing';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 
 const routes = [
   {
@@ -11,8 +12,8 @@ const routes = [
     element: <Layout />,
     children: [
       { path: '/', element: <Home /> },
-      { path: '/login', element: <Login /> },
-      { path: '/signup', element: <Signup /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/signup', element: <SignupPage /> },
       { path: '/pricing', element: <Pricing /> },
     ],
   },
