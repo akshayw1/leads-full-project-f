@@ -1,0 +1,175 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { formatTitle } from '../../utils/format';
+
+const Plan = () => {
+  const [plans, setPlans] = useState();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/plans`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      })
+      .then((response) => {
+        setPlans(response.data);
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+      });
+  }, []);
+
+  console.log(plans);
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-6 text-center mt-5">
+        Subscribe to access the leads features
+      </h1>
+      <div className="flex flex-wrap gap-4">
+        {plans &&
+          plans.data.map((plan) => (
+            <div
+              key={plan._id}
+              className="w-64 p-4 bg-white shadow-lg rounded-2xl dark:bg-gray-800"
+            >
+              <p className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-50">
+                {formatTitle(plan.name)}
+              </p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                ${plan.price}
+                <span className="text-sm text-gray-300">/ month</span>
+              </p>
+              <p className="mt-4 text-xs text-gray-600 dark:text-gray-100">
+                For personal use and gain experience on how leads work.
+              </p>
+              <ul className="w-full mt-6 mb-6 text-sm text-gray-600 dark:text-gray-100">
+                <li className="mb-3 flex items-center">
+                  <svg
+                    className="w-6 h-6 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="6"
+                    height="6"
+                    stroke="currentColor"
+                    fill="#10b981"
+                    viewBox="0 0 1792 1792"
+                  >
+                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+                  </svg>
+                  Free Access to applications
+                </li>
+                <li className="mb-3 flex items-center">
+                  <svg
+                    className="w-6 h-6 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="6"
+                    height="6"
+                    stroke="currentColor"
+                    fill="#10b981"
+                    viewBox="0 0 1792 1792"
+                  >
+                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+                  </svg>
+                  {plan.searchQueriesPerDay} Search Queries per day
+                </li>
+                <li className="mb-3 flex items-center">
+                  <svg
+                    className="w-6 h-6 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="6"
+                    height="6"
+                    stroke="currentColor"
+                    fill="#10b981"
+                    viewBox="0 0 1792 1792"
+                  >
+                    <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+                  </svg>
+                  {plan.leadsPerDay} leads from Queries per day
+                </li>
+              </ul>
+              <button
+                type="button"
+                className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              >
+                Choose plan
+              </button>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+
+  // return (
+  //   <div className="w-64 p-4 bg-white shadow-lg rounded-2xl dark:bg-gray-800">
+  //     {plans &&
+  //       plans.data.map((plan) => (
+  //         <div key={plan.id}>
+  //           <p className="mb-4 text-xl font-medium text-gray-800 dark:text-gray-50">
+  //             {plan.name}
+  //           </p>
+  //           <p className="text-3xl font-bold text-gray-900 dark:text-white">
+  //             ${plan.price}
+  //             <span className="text-sm text-gray-300">/ month</span>
+  //           </p>
+  //           <p className="mt-4 text-xs text-gray-600 dark:text-gray-100">
+  //             For pesonal user and gain exprince on how leads works.
+  //           </p>
+  //           <ul className="w-full mt-6 mb-6 text-sm text-gray-600 dark:text-gray-100">
+  //             <li className="mb-3 flex items-center ">
+  //               <svg
+  //                 className="w-6 h-6 mr-2"
+  //                 xmlns="http://www.w3.org/2000/svg"
+  //                 width="6"
+  //                 height="6"
+  //                 stroke="currentColor"
+  //                 fill="#10b981"
+  //                 viewBox="0 0 1792 1792"
+  //               >
+  //                 <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+  //               </svg>
+  //               Free Access to applications
+  //             </li>
+  //             <li className="mb-3 flex items-center ">
+  //               <svg
+  //                 className="w-6 h-6 mr-2"
+  //                 xmlns="http://www.w3.org/2000/svg"
+  //                 width="6"
+  //                 height="6"
+  //                 stroke="currentColor"
+  //                 fill="#10b981"
+  //                 viewBox="0 0 1792 1792"
+  //               >
+  //                 <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+  //               </svg>
+  //               {plan.searchQueriesPerDay} Search Queries per day
+  //             </li>
+
+  //             <li className="mb-3 flex items-center ">
+  //               <svg
+  //                 className="w-6 h-6 mr-2"
+  //                 xmlns="http://www.w3.org/2000/svg"
+  //                 width="6"
+  //                 height="6"
+  //                 stroke="currentColor"
+  //                 fill="#10b981"
+  //                 viewBox="0 0 1792 1792"
+  //               >
+  //                 <path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path>
+  //               </svg>
+  //               {plan.leadsPerDay} leads from Queries per day
+  //             </li>
+  //           </ul>
+  //           <button
+  //             type="button"
+  //             className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+  //           >
+  //             Choose plan
+  //           </button>
+  //         </div>
+  //       ))}
+  //   </div>
+  // );
+};
+
+export default Plan;
