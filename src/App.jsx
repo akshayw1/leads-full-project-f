@@ -5,6 +5,7 @@ import Signup from './components/auth/Signup';
 import Pricing from './components/pricing/Pricing';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import VerifyEmailPage from './components/auth/VerifyEmail';
 
 const routes = [
   {
@@ -15,6 +16,7 @@ const routes = [
       { path: '/login', element: <LoginPage /> },
       { path: '/signup', element: <SignupPage /> },
       { path: '/pricing', element: <Pricing /> },
+      { path: 'auth/verify-email', element: <VerifyEmailPage /> },
     ],
   },
 ];

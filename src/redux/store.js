@@ -8,6 +8,7 @@ import signupSlice from './reducers/signupSlice';
 import loginReducer from './reducers/loginSlice';
 import searchSlice from './reducers/searchSlice';
 import statisticsSlice from './reducers/statisticsSlice';
+import verifySlice from './reducers/verifyEmailSlice';
 
 const middlewares = [];
 if (process.env.NODE_ENV === 'development') {
@@ -39,6 +40,7 @@ const store = configureStore({
     signup: signupSlice,
     search: searchSlice,
     statistics: statisticsSlice,
+    verify: verifySlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([...middlewares, thunk]),
