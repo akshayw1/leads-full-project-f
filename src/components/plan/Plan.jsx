@@ -115,7 +115,7 @@ const Plan = () => {
               <StripeCheckout
                 token={({ id }) => handleToken({ token: id }, plan)}
                 stripeKey={
-                  'pk_test_51OAsDhSIhKUUNQyAlUhdbLOvPooeMhb6utHUsSDIqDzuVa7h2mAafYqYITBGbCZ5b5MMesZPEl8RBVlWZerN0FUm00drRwqwdr'
+                  'pk_test_51OAsDhSIhKUUNQyAKiAnTgKHpCYAyIOK0QxuCrmII0YaAbz74MwxUVmTc8MqsMhEz8JVOIMUxtBsKEs40SYs8Q6l007Tdcak4o'
                 }
                 name={formatTitle(plan.name)}
                 description={`Subscription for ${formatTitle(plan.name)}`}
