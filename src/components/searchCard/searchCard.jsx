@@ -9,8 +9,24 @@ import { search } from '../../redux/reducers/searchSlice';
 import Button from '../Button';
 import TableComp from '../TableComp/TableComp';
 import { fetchStatistics } from '../../redux/reducers/statisticsSlice';
+import Modal from 'react-modal';
+import ModalSubcribe from '../ModalSubcribe/ModalSubcribe';
+
 
 const searchCard = () => {
+  const [errorModalIsOpen, setErrorModalIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const openErrorModal = (message) => {
+    setErrorMessage(message);
+    setErrorModalIsOpen(true);
+  };
+
+  const closeErrorModal = () => {
+    setErrorModalIsOpen(false);
+    setErrorMessage('');
+  };
+
   const [searchResults, setSearchResults] = useState();
   const { isLoading } = useSelector((state) => state.search);
   const dispatch = useDispatch();
@@ -25,13 +41,58 @@ const searchCard = () => {
       dispatch(fetchStatistics());
       setSearchResults(response.data);
     } catch (error) {
-      showErrorMessage(error.data.message);
+      openErrorModal("An error occurred");
     }
   };
 
   return (
     <>
-      <Card className="max-w-sm">
+   <Modal
+  isOpen={errorModalIsOpen}
+  onRequestClose={closeErrorModal}
+  contentLabel="Error Modal"
+  style={{
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    content: {
+      width: '60%', // Adjust the width as needed
+      height: 'fit-content', // Adjust the height as needed
+      margin: 'auto',
+    },
+  }}
+>
+  <div>
+    <ModalSubcribe/>
+  </div>
+  
+  <button onClick={closeErrorModal}
+            
+            type="button"
+            className="flex absolute top-0 right-0 justify-center items-center w-7 h-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            data-hs-overlay="#hs-cookies"
+          >
+            <span className="sr-only">Close</span>
+            <svg
+              className="flex-shrink-0 w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+</Modal>
+
+      
+      <Card className="max-w-sm mt-2">
         <text className="text-2xl">Search For Leads</text>
         <form
           className="flex flex-col gap-4"
@@ -88,7 +149,7 @@ const searchCard = () => {
             <Button
               type="submit"
               label="search"
-              className="cursor-pointer rounded py-2 px-8 text-center text-lg font-bold  text-white"
+              className="cursor-pointer bg-deep-purple-accent-700 rounded py-2 px-8 text-center text-lg font-bold  text-white"
             />
           )}
 

@@ -24,53 +24,119 @@ const Signup = () => {
       navigate('/login');
     } catch (error) {
       showErrorMessage(error.data.message);
+      console.log(error);
     }
   };
 
   return (
     <>
-      <div className="md:w-2/3 mx-auto w-full pb-16 sm:max-w-screen-sm md:max-w-screen-md lg:w-1/3 lg:max-w-screen-lg xl:max-w-screen-xl -mt-16">
-        <form
-          className="shadow-lg mb-4 rounded-lg border border-gray-100 py-10 px-8"
-          onSubmit={(event) => {
+        <main className="w-full max-w-md mx-auto p-6">
+  <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div className="p-4 sm:p-7">
+      <div className="text-center">
+        <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+          Sign up
+        </h1>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          Already have an account?
+          <a
+            className="text-deep-purple-accent-700 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            href="../examples/html/signin.html"
+          >
+            Sign in here
+          </a>
+        </p>
+      </div>
+      <div className="mt-5">
+       
+       
+        {/* Form */}
+        <form onSubmit={(event) => {
             handleSubmit(onSubmit)(event);
-          }}
-        >
-          <div className="mb-4">
-            <label className="mb-2 block text-sm font-bold">name</label>
-            <input
-              className="shadow-sm w-full cursor-text appearance-none rounded border border-gray-300 py-2 px-3 leading-tight outline-none ring-blue-500 focus:ring"
-              id="name"
-              type="name"
-              placeholder="name"
-              required
-              {...register('name')}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="mb-2 block text-sm font-bold">E-mail</label>
-            <input
-              className="shadow-sm w-full cursor-text appearance-none rounded border border-gray-300 py-2 px-3 leading-tight outline-none ring-blue-500 focus:ring"
-              id="email"
-              type="email"
-              placeholder="email"
-              required
-              {...register('email')}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="mb-2 block text-sm font-bold">Password</label>
-            <input
-              className="shadow-sm w-full cursor-text appearance-none rounded border border-gray-300 py-2 px-3 leading-tight outline-none ring-blue-500 focus:ring"
-              id="password"
-              type="password"
-              placeholder="******************"
-              required
-              {...register('password')}
-            />
-          </div>
-
-          <div className="mb-6">
+          }}>
+          <div className="grid gap-y-4">
+            {/* Form Group */}
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm mb-2 dark:text-white"
+              >
+                Name
+              </label>
+              <div className="relative">
+              <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  required
+                  {...register('name')}
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                 
+                />
+                 <div
+                className=" text-xs text-red-600 mt-2"
+                id="confirm-name-error"
+              >
+                {errors.name && <p>{errors.name.message}</p>}
+              </div>
+              </div>
+              
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm mb-2 dark:text-white"
+              >
+                Email address
+              </label>
+              <div className="relative">
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="email"
+                  required
+                  {...register('email')}
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                 
+                />
+                
+              </div>
+              <p className="hidden text-xs text-red-600 mt-2" id="email-error">
+              {errors.email && <p>{errors.email.message}</p>}
+              </p>
+            </div>
+            {/* End Form Group */}
+            {/* Form Group */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm mb-2 dark:text-white"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="******************"
+                  required
+                  {...register('password')}
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  
+                />
+                
+              </div>
+              <p
+                className="hidden text-xs text-red-600 mt-2"
+                id="password-error"
+              >
+               {errors.password && <p>{errors.password.message}</p>}
+              </p>
+            </div>
+          
+            {/* End Form Group */}
+            {/* Checkbox */}
+            <div className="mb-6">
             <label className="mb-2 flex text-sm">
               <input type="checkbox" name="accept" className="mr-2" required />
               <div className="text-gray-800">
@@ -93,14 +159,18 @@ const Signup = () => {
               </div>
             </label>
           </div>
-          <div className="flex items-center">
+            {/* End Checkbox */}
+            <div className="flex items-center">
             <div className="flex-1"></div>
             {isLoading ? (
               <>
-                <Button type="submit" label="" className="" disabled={true}>
+  <button
+              type="submit" disabled={true}
+              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-deep-purple-accent-700 text-white hover:bg-deep-purple-accent-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
                   <svg
                     role="status"
-                    className="inline mr-3 w-4 h-4 text-white animate-spin"
+                    className="w-full inline mr-3 h-4 text-white animate-spin"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -114,18 +184,29 @@ const Signup = () => {
                       fill="currentColor"
                     />
                   </svg>
-                </Button>
+                </button>
               </>
             ) : (
-              <Button
-                type="submit"
-                label="Signup"
-                className="cursor-pointer rounded py-2 px-8 text-center text-lg font-bold  text-white"
-              />
+              <button
+              type="submit"
+              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-deep-purple-accent-700 text-white hover:bg-deep-purple-accent-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
+              Sign up
+            </button>
             )}
           </div>
+          <div>
+         
+          </div>
+          
+          </div>
         </form>
+        {/* End Form */}
       </div>
+    </div>
+  </div>
+</main>
+     
     </>
   );
 };

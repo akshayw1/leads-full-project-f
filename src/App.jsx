@@ -6,19 +6,23 @@ import Pricing from './components/pricing/Pricing';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import VerifyEmailPage from './components/auth/VerifyEmail';
+import Lay from './layout/Lay';
+import HomePage from './pages/HomePage';
 
 const routes = [
   {
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/', element: <Home /> },
+      { path: '/', element: <HomePage /> },
+      { path: '/dashboard', element: <Home /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/signup', element: <SignupPage /> },
       { path: '/pricing', element: <Pricing /> },
       { path: 'auth/verify-email', element: <VerifyEmailPage /> },
     ],
   },
+  
 ];
 
 const router = (

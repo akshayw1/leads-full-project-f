@@ -38,7 +38,7 @@ const Plan = () => {
         }
       );
       toast.success(response.data.message);
-      navigate('/');
+      navigate('/dashboard');
       return response;
     } catch (error) {
       console.error('There was an error!', error);
