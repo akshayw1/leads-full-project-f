@@ -1,5 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import expireReducer from 'redux-persist-expire';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -9,6 +18,7 @@ import loginReducer from './reducers/loginSlice';
 import searchSlice from './reducers/searchSlice';
 import statisticsSlice from './reducers/statisticsSlice';
 import verifySlice from './reducers/verifyEmailSlice';
+import paymentCheckoutSlice from './reducers/PaymentsSlice';
 
 const middlewares = [];
 if (process.env.NODE_ENV === 'development') {
@@ -41,9 +51,14 @@ const store = configureStore({
     search: searchSlice,
     statistics: statisticsSlice,
     verify: verifySlice,
+    payment: paymentCheckoutSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([...middlewares, thunk]),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

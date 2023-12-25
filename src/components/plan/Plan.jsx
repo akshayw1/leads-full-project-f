@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { formatTitle } from '../../utils/format';
-import StripeCheckout from 'react-stripe-checkout';
-import axios from '../../redux/app/customAxios';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from '../../redux/app/customAxios';
+import { toast } from 'react-toastify';
+import { formatTitle } from '../../utils/format';
+import { createPaymentsSession } from '../../redux/reducers/PaymentsSlice';
+import loader from '../../assets/loader.svg';
 
 const Plan = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { data, isLoading } = useSelector((state) => state.payment);
   const [plans, setPlans] = useState();
+  const [loadingStates, setLoadingStates] = useState({});
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
@@ -27,24 +31,11 @@ const Plan = () => {
       });
   }, []);
 
-  const handleToken = async (token, plan) => {
-    try {
-      console.log('Sending request with token:', token);
-      const response = await axios.post(
-        `${baseUrl}/subscription/subscribe-plan/${plan._id}`,
-        {
-          token: token.id,
-          amount: plan.price * 100,
-        }
-      );
-      toast.success(response.data.message);
-      navigate('/dashboard');
-      return response;
-    } catch (error) {
-      console.error('There was an error!', error);
-      toast.error('Payment failed');
-    }
+  const createCheckoutSession = (plan) => {
+    setLoadingStates((prev) => ({ ...prev, [plan._id]: true }));
+    dispatch(createPaymentsSession(plan._id));
   };
+  if (data) window.location.href = data.url;
 
   return (
     <div>
@@ -112,23 +103,26 @@ const Plan = () => {
                   {plan.leadsPerDay} leads from Queries per day
                 </li>
               </ul>
-              <StripeCheckout
-                token={({ id }) => handleToken({ token: id }, plan)}
-                stripeKey={
-                  'pk_test_51OAsDhSIhKUUNQyAKiAnTgKHpCYAyIOK0QxuCrmII0YaAbz74MwxUVmTc8MqsMhEz8JVOIMUxtBsKEs40SYs8Q6l007Tdcak4o'
-                }
-                name={formatTitle(plan.name)}
-                description={`Subscription for ${formatTitle(plan.name)}`}
-                amount={plan.price * 100}
-                currency="inr"
+
+              <button
+                type="button"
+                disabled={loadingStates[plan._id]}
+                className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                onClick={() => createCheckoutSession(plan)}
               >
-                <button
-                  type="button"
-                  className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-                >
-                  Choose plan
-                </button>
-              </StripeCheckout>
+                {loadingStates[plan._id] ? (
+                  <div className="flex justify-center mt-0 py-0">
+                    <img
+                      src={loader}
+                      alt="Loader Spinner"
+                      className="text-green-500 animate-spin w-[20px] text-center"
+                      data-testid="spinner"
+                    />
+                  </div>
+                ) : (
+                  'Choose Plan'
+                )}
+              </button>
             </div>
           ))}
       </div>
