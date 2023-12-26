@@ -15,12 +15,10 @@ const LoginPage = () => {
     }
   }, [isAuthenticated]);
   return (
-    <div className= "w-screen font-sans text-gray-900">
+    <div className="w-screen font-sans text-gray-900">
       <div className="-mt-16">
         <div className="mx-auto w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
-          <div className="mx-2 py-12 text-center md:mx-auto md:w-2/3 md:py-20">
-           
-          </div>
+          <div className="mx-2 py-12 text-center md:mx-auto md:w-2/3 md:py-20"></div>
         </div>
       </div>
       <Login />

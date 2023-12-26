@@ -2,13 +2,15 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import NavBar from '../components/Navbar/NavBar';
 
-const Lay = ({children}) => {
+const HomeLayout = () => {
   return (
     <div>
-    
-   {children}
+      <NavBar />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };
 
-export default Lay;
+export default HomeLayout;

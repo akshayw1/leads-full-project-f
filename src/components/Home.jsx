@@ -11,23 +11,20 @@ const Home = () => {
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      navigate('/login');
+      navigate('/auth/login');
     }
   }, [isAuthenticated]);
 
   return (
     <div>
-   <div className="w-full flex flex-col-reverse sm:flex-row">
-  <div className="sm:px-12 w-full sm:mt-0 mt-12">
-    <SearchCard />
-  </div>
-  <div className="h-44 w-full mt-4">
-    <TuteCard />
-  </div>
-</div>
-
-
-
+      <div className="w-full flex flex-col-reverse sm:flex-row">
+        <div className="sm:px-12 w-full sm:mt-0 mt-12">
+          <SearchCard />
+        </div>
+        <div className="h-44 w-full mt-4">
+          <TuteCard />
+        </div>
+      </div>
     </div>
   );
 };

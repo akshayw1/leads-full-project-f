@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from '../../redux/app/customAxios';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { formatTitle } from '../../utils/format';
 import { createPaymentsSession } from '../../redux/reducers/PaymentsSlice';
@@ -10,6 +10,7 @@ import loader from '../../assets/loader.svg';
 
 const Plan = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, isLoading } = useSelector((state) => state.payment);
   const [plans, setPlans] = useState();
   const [loadingStates, setLoadingStates] = useState({});
@@ -32,6 +33,11 @@ const Plan = () => {
   }, []);
 
   const createCheckoutSession = (plan) => {
+    if (!localStorage.getItem('token')) {
+      toast.error('Please login to subscribe');
+      navigate('/auth/login');
+      return;
+    }
     setLoadingStates((prev) => ({ ...prev, [plan._id]: true }));
     dispatch(createPaymentsSession(plan._id));
   };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import NavBar from '../components/Navbar/NavBar';
 
-const HomeLayout = () => {
+const AuthLayout = () => {
   return (
     <div>
       <NavBar />
@@ -13,4 +13,4 @@ const HomeLayout = () => {
   );
 };
 
-export default HomeLayout;
+export default AuthLayout;
