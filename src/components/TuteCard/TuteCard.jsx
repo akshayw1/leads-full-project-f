@@ -100,7 +100,7 @@ const TuteCard = () => {
                     />
                   </div>
                 </div>
-                <div className="flex pt-2  text-sm text-gray-500">
+                {/* <div className="flex pt-2  text-sm text-gray-500">
                   <div className="flex-1 inline-flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -137,9 +137,9 @@ const TuteCard = () => {
                       Remaining Leads
                     </p>
                   </div>
-                </div>
-                <div className="mt-5 flex justify-start items-center gap-10">
-                  {}
+                </div> */}
+
+                {/* <div className="mt-5 flex justify-start items-center gap-10">
                   <p>
                     Plan:{' '}
                     <span className="ml-1">
@@ -156,7 +156,7 @@ const TuteCard = () => {
                         : 'Expired'}
                     </span>
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
