@@ -4,7 +4,7 @@ import { fetchStatistics } from '../../redux/reducers/statisticsSlice';
 import getUserInfo from '../../utils/getUserInfo';
 import { formatTitle, remainingDays } from '../../utils/format';
 
-const TuteCard = () => {
+const ProfileCard = () => {
   const statistics = useSelector((state) => state.statistics);
   const dispatch = useDispatch();
   const info = getUserInfo();
@@ -17,7 +17,7 @@ const TuteCard = () => {
 
   return (
     <>
-      <div className="max-w-5xl w-full mx-auto z-10 mr-5">
+      <div className="max-w-5xl w-3/5 mx-auto z-10 -mt-[600px]">
         <div className="flex flex-col">
           <div className="bg-white border border-white shadow-lg  rounded-3xl p-4 m-4">
             <div className="flex-none sm:flex">
@@ -166,4 +166,4 @@ const TuteCard = () => {
   );
 };
 
-export default TuteCard;
+export default ProfileCard;

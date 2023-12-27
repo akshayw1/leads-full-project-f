@@ -63,18 +63,29 @@ const NavBar = () => {
                 ))}
               </ul>
             </div>
-            <ul className="flex items-center hidden space-x-8 lg:flex">
+            <ul className="flex items-center space-x-8 lg:flex">
               {info && info.data ? (
-                <li>
-                  <Link to="/">
-                    <button
-                      className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                      onClick={handleSignout}
-                    >
-                      Sign out
-                    </button>
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link to="/profile">
+                      <img
+                        className="w-10 h-10 rounded-full b"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                        alt=""
+                      />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/">
+                      <button
+                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                        onClick={handleSignout}
+                      >
+                        Sign out
+                      </button>
+                    </Link>
+                  </li>
+                </>
               ) : (
                 <>
                   <li>
