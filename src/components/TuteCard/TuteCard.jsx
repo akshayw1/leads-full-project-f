@@ -26,7 +26,7 @@ const TuteCard = () => {
                   <div className="flex items-center">
                     <div className="flex flex-col">
                       <div className="w-full flex-none text-2xl text-gray-800 font-bold leading-none">
-                        {/* 👋 <b className="text-2xl">Hello</b> {info.data.name} */}
+                        👋 <b className="text-2xl">Hello</b> {info.data.name}
                       </div>
                       <div className="flex-auto text-gray-500 my-1">
                         <span className="mr-3 ">LeadFinder</span>
@@ -100,7 +100,7 @@ const TuteCard = () => {
                     />
                   </div>
                 </div>
-                {/* <div className="flex pt-2  text-sm text-gray-500">
+                <div className="flex pt-2  text-sm text-gray-500">
                   <div className="flex-1 inline-flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -137,9 +137,8 @@ const TuteCard = () => {
                       Remaining Leads
                     </p>
                   </div>
-                </div> */}
-
-                {/* <div className="mt-5 flex justify-start items-center gap-10">
+                </div>
+                <div className="mt-5 flex justify-start items-center gap-10">
                   <p>
                     Plan:{' '}
                     <span className="ml-1">
@@ -156,7 +155,7 @@ const TuteCard = () => {
                         : 'Expired'}
                     </span>
                   </p>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>

@@ -1,25 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import getUserInfo from '../../utils/getUserInfo';
 import { NavLinks } from '../../utils/NavLinks';
 
 const NavBar = () => {
-  const [userInfo, setUserInfo] = useState(null);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const info = getUserInfo();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    try {
-      const decodedUserInfo = jwtDecode(token);
-      setUserInfo(decodedUserInfo);
-    } catch (error) {
-      setUserInfo(null);
-    }
-  }, []);
-
-  const info = userInfo;
   const handleSignout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('persist:root');
@@ -61,6 +49,16 @@ const NavBar = () => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  {info && info.data && (
+                    <Link
+                      to="/dashboard"
+                      className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                </li>
               </ul>
             </div>
             <ul className="flex items-center space-x-8 lg:flex">
